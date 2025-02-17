@@ -1,5 +1,6 @@
-import React from 'react'
-import { SearchManufacturerProps } from '@/types'
+
+import { Combobox, Transition } from '@headlessui/react';
+import { SearchManufacturerProps } from '@/types';
 
 const SearchManufacturer = ( {manufacturer, setManufacturer}: SearchManufacturerProps) => {
   return (
