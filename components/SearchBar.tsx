@@ -51,7 +51,7 @@ const SearchBar = () => {
 
     const newPathName = `${window.location.pathname}?${searchParams.toString()}`;
 
-    router.push(newPathName);
+    router.push(newPathName, {scroll: false});
   } 
 
   return (
@@ -61,7 +61,7 @@ const SearchBar = () => {
           manufacturer={manufacturer}
           setManufacturer={setmanufacturer}
         />
-      <SearchButton otherClasses="sm:hidden" />
+        <SearchButton otherClasses="sm:hidden" />
       </div>
       <div className="searchbar__item">
         <Image 

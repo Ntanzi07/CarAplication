@@ -1,12 +1,12 @@
-import { CarProps } from "@/types";
-import car from "../data/car.json";
+import { CarProps, FilterProps } from "@/types";
+import cars from "../data/car.json";
 
-export async function fatchCars() {
-
+export async function fatchCars(filters: FilterProps) {
+  const { manufacturer, year, model, limit, fuel } = filters;
   //using a API
   /*
   const headers = {
-    'x-rapidapi-key': '38d7d57e18msh3a939f46c2d9dc2p1af752jsn4285d219e65f',
+    'x-rapidapi-key': '',
     'x-rapidapi-host': 'cars-by-api-ninjas.p.rapidapi.com'
   }
 
@@ -18,7 +18,14 @@ export async function fatchCars() {
   */
 
   // using a exemple data
-  const result = await car;
+
+  const result = await cars.filter((car) => 
+    car.make.toLowerCase().includes(manufacturer.toLowerCase()) &&
+    car.model.toLowerCase().includes(model.toLowerCase()) &&
+    car.year === year &&
+    car.fuel_type.toLowerCase().includes(fuel.toLowerCase())
+  ).slice(0, limit);
+
   return result;
 }
 
@@ -53,6 +60,6 @@ export const generateCarImageUrl = (car: CarProps, angle?: string) => {
   //url.searchParams.append('paintdescription', `Emotional Red metallic`);
 
 
-  
-    return `${url}`;
-  }
+
+  return `${url}`;
+}

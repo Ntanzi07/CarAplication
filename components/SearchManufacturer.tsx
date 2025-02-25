@@ -10,12 +10,12 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: SearchManufacture
 
   const filteredManufacturers =
     query === ""
-      ? manufacturers
+      ? manufacturers.slice(0,15)
       : manufacturers.filter((item) => (
         item.toLowerCase()
           .replace(/\s+/g, "")
           .includes(query.toLowerCase().replace(/\s+/g, ""))
-      ));
+      )).slice(0, 10);
 
   return (
     <div className="search-manufacturer">
@@ -30,6 +30,7 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: SearchManufacture
               alt="Car Logo"
             />
           </Combobox.Button>
+
           <Combobox.Input
             className="search-manufacturer__input"
             placeholder="Volkswagen"
@@ -44,7 +45,7 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: SearchManufacture
             leaveTo='opacity-0'
             afterLeave={() => setQuery('')}
           >
-            <Combobox.Options>
+            <Combobox.Options className="absolute z-10 bg-white w-full rounded-xl">
               {filteredManufacturers.map((item) => (
                 <Combobox.Option
                   key={item}
@@ -61,10 +62,10 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: SearchManufacture
                       <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
                         {item}
                       </span>
-                      { selected ? (
-                          <span className={` absolute inset-y-0 left-0 flex items-center pl-3 ${active ? 'text-white' : 'text-teal-600'}`} >
-                          </span>
-                          ): null }
+                      {selected ? (
+                        <span className={` absolute inset-y-0 left-0 flex items-center pl-3 ${active ? 'text-white' : 'text-teal-600'}`} >
+                        </span>
+                      ) : null}
                     </>
                   )}
                 </Combobox.Option>
