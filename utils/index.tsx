@@ -2,6 +2,8 @@ import { CarProps } from "@/types";
 import car from "../data/car.json";
 
 export async function fatchCars() {
+
+  //using a API
   /*
   const headers = {
     'x-rapidapi-key': '38d7d57e18msh3a939f46c2d9dc2p1af752jsn4285d219e65f',
@@ -14,6 +16,8 @@ export async function fatchCars() {
 
   const result = await response.json();
   */
+
+  // using a exemple data
   const result = await car;
   return result;
 }
@@ -38,13 +42,13 @@ export const generateCarImageUrl = (car: CarProps, angle?: string) => {
   const url = new URL("https://cdn.imagin.studio/getimage");
   const { make, model, year } = car;
 
-  url.searchParams.append('customer', 'hrjavascript-mastery');
+  url.searchParams.append('customer', 'img');
   url.searchParams.append('make', make);
   url.searchParams.append('modelFamily', model.split(" ")[0]);
   url.searchParams.append('zoomType', 'fullscreen');
   url.searchParams.append('modelYear', `${year}`);
   // url.searchParams.append('zoomLevel', zoomLevel);
   url.searchParams.append('angle', `${angle}`);
-
-  return `${url}`;
-}
+  
+    return `${url}`;
+  }
