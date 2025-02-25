@@ -49,6 +49,10 @@ export const generateCarImageUrl = (car: CarProps, angle?: string) => {
   url.searchParams.append('modelYear', `${year}`);
   // url.searchParams.append('zoomLevel', zoomLevel);
   url.searchParams.append('angle', `${angle}`);
+  url.searchParams.append('paintId', `3U5`);
+  //url.searchParams.append('paintdescription', `Emotional Red metallic`);
+
+
   
     return `${url}`;
   }
