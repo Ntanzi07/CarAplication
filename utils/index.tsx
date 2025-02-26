@@ -22,7 +22,7 @@ export async function fatchCars(filters: FilterProps) {
   const result = await cars.filter((car) => 
     car.make.toLowerCase().includes(manufacturer.toLowerCase()) &&
     car.model.toLowerCase().includes(model.toLowerCase()) &&
-    car.year === year &&
+    year ? car.year === year : true &&
     car.fuel_type.toLowerCase().includes(fuel.toLowerCase())
   ).slice(0, limit);
 

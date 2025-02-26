@@ -5,7 +5,7 @@ import { fatchCars } from "@/utils";
 export default async function Home({ searchParams }: { searchParams: FilterProps }) {
   const allCars = await fatchCars({
     manufacturer: searchParams.manufacturer || '',
-    year: searchParams.year || 2022,
+    year: searchParams.year,
     fuel: searchParams.fuel || '',
     limit: searchParams.limit || 10,
     model: searchParams.model || ''
