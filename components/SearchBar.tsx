@@ -4,6 +4,7 @@ import React, { useState } from "react"
 import { useRouter } from "next/navigation"
 import SearchManufacturer from "./SearchManufacturer"
 import Image from "next/image"
+import { updateSearchParams } from "@/utils"
 
 const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
   <button type="submit" className={`-ml-3 z-10 ${otherClasses}`}>
@@ -28,28 +29,12 @@ const SearchBar = () => {
       return alert('Please fill in the search bar');
     }
 
-    updateSearchParams(
-      model.toLowerCase(), 
-      manufacturer.toLowerCase()
-    );
+    handleUpdateParams('model', model.toLowerCase());
+    handleUpdateParams('manufacturer', manufacturer.toLowerCase());
   }
 
-  const updateSearchParams = (model: string, manufacturer: string) => {
-    const searchParams = new URLSearchParams(window.location.search);
-
-    if(model) {
-      searchParams.set('model', model);
-    }else{
-      searchParams.delete('model');
-    }
-
-    if(manufacturer) {
-      searchParams.set('manufacturer', manufacturer);
-    }else{
-      searchParams.delete('manufacturer');
-    }
-
-    const newPathName = `${window.location.pathname}?${searchParams.toString()}`;
+  const handleUpdateParams = (title: string, value: string) => {
+    const newPathName = updateSearchParams(title, value);
 
     router.push(newPathName, {scroll: false});
   } 

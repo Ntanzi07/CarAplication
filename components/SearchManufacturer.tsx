@@ -1,6 +1,6 @@
 "use client"
 import Image from 'next/image';
-import { Combobox, Transition } from '@headlessui/react';
+import { Combobox, ComboboxButton, ComboboxOption, ComboboxOptions, Transition } from '@headlessui/react';
 import { SearchManufacturerProps } from '@/types';
 import { useState, Fragment } from 'react';
 import { manufacturers } from '@/constants';
@@ -15,13 +15,13 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: SearchManufacture
         item.toLowerCase()
           .replace(/\s+/g, "")
           .includes(query.toLowerCase().replace(/\s+/g, ""))
-      )).slice(0, 10);
+      ));
 
   return (
     <div className="search-manufacturer">
       <Combobox value={manufacturer} onChange={setManufacturer}>
         <div className='relative w-full'>
-          <Combobox.Button className="absolute top-[14px]">
+          <ComboboxButton className="absolute top-[14px]">
             <Image
               src="/car-logo.svg"
               width={20}
@@ -29,7 +29,7 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: SearchManufacture
               className="ml-4"
               alt="Car Logo"
             />
-          </Combobox.Button>
+          </ComboboxButton>
 
           <Combobox.Input
             className="search-manufacturer__input"
@@ -45,9 +45,9 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: SearchManufacture
             leaveTo='opacity-0'
             afterLeave={() => setQuery('')}
           >
-            <Combobox.Options className="absolute z-10 bg-white w-full rounded-xl">
+            <ComboboxOptions className="absolute z-10 bg-white w-full rounded-xl drop-shadow-md py-3 overflow-auto max-h-96">
               {filteredManufacturers.map((item) => (
-                <Combobox.Option
+                <ComboboxOption
                   key={item}
                   className={({ active }) => `
                         relative search-manufacturer__option
@@ -68,9 +68,9 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: SearchManufacture
                       ) : null}
                     </>
                   )}
-                </Combobox.Option>
+                </ComboboxOption>
               ))}
-            </Combobox.Options>
+            </ComboboxOptions>
           </Transition>
         </div>
       </Combobox >

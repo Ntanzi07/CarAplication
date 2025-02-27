@@ -3,21 +3,6 @@ import cars from "../data/car.json";
 
 export async function fatchCars(filters: FilterProps) {
   const { manufacturer, year, model, limit, fuel } = filters;
-  //using a API
-  /*
-  const headers = {
-    'x-rapidapi-key': '',
-    'x-rapidapi-host': 'cars-by-api-ninjas.p.rapidapi.com'
-  }
-
-  const response = await fetch('https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=corolla', {
-    headers: headers,
-  });
-
-  const result = await response.json();
-  */
-
-  // using a exemple data
 
   const result = await cars.filter((car) => 
     car.make.toLowerCase().includes(manufacturer.toLowerCase()) &&
@@ -62,4 +47,18 @@ export const generateCarImageUrl = (car: CarProps, angle?: string) => {
 
 
   return `${url}`;
+}
+
+export const updateSearchParams = (type: string, value: string) => {
+
+  const searchParams = new URLSearchParams(window.location.search);
+
+  if(value)
+    searchParams.set(type, value);
+  else
+    searchParams.delete(type);
+
+  const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
+  
+  return newPathname;
 }
